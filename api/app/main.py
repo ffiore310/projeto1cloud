@@ -3,7 +3,6 @@ from io import StringIO
 import os
 import socket
 from typing import Generator
-
 import pandas as pd
 import requests
 from fastapi import Depends, FastAPI, HTTPException, Query, status
@@ -24,14 +23,11 @@ API_URL = "https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL"
 # 1.  Configurações de segurança (mesmo que antes)
 # ------------------------------------------------------------------ #
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-SECRET_KEY = "TROQUE-ESSA-CHAVE"          # guarde em variável de ambiente em prod
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
-security = HTTPBearer()
 
-# ------------------------------------------------------------------ #
-# 2.  Configuração do PostgreSQL via SQLAlchemy
-# ------------------------------------------------------------------ #
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
+ALGORITHM = "HS256"  
+
 DB_URL = os.getenv(
     "DATABASE_URL",
     "postgresql+psycopg2://postgres:postgres@localhost:5432/fastapi_demo",
