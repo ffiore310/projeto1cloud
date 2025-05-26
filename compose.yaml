@@ -1,0 +1,20 @@
+# compose.yaml
+services:
+
+  database:
+    hostname: database
+    image: postgres:16
+    env_file: .env
+
+
+  app:
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+    build:
+      context: ./api
+      # força baixar/compilar a variante amd64
+      # platform: linux/amd64

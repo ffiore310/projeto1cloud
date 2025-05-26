@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, timezone
 from io import StringIO
+import auth
 import os
 import socket
 from typing import Generator
@@ -27,6 +28,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
 ALGORITHM = "HS256"  
+security = HTTPBearer() 
 
 DB_URL = os.getenv(
     "DATABASE_URL",
@@ -188,3 +190,11 @@ def consultar(
         )
 
     return JSONResponse(data)
+
+# @app.get("/consultar")
+# def consultar(current_user: User = Depends(auth.get_current_user)):
+#     if not current_user:
+#         raise HTTPException(401, "Usuário não autenticado")
+#     resposta = requests.get("https://economia.awesomeapi.com.br/last/USD-BRL").json()
+#     return {"dados": resposta}
+
