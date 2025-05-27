@@ -14,11 +14,17 @@ API RESTful para cadastro, autenticação de usuários e consulta de cotações 
 
 ## 📁 Estrutura do projeto
 ├── api
+
 │ ├── app
+
 │ │ └── main.py
+
 │ ├── Dockerfile
+
 │ └── requirements.txt
+
 ├── .env
+
 └── compose.yaml
 
 ---
@@ -43,8 +49,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES=60
 # Docker image
 IMAGE_NAME=ffiore310/projeto1cloud-app
 IMAGE_TAG=latest
-
----
+```dotenv
 
 ## Build e execução local
 
