@@ -14,7 +14,7 @@ services:
       - 8080:8080
     depends_on:
       - database
-    build:
-      context: ./api
+    image: ffiore310/projeto1cloud-app
+      # context: ./api
       # força baixar/compilar a variante amd64
       # platform: linux/amd64
